@@ -109,9 +109,51 @@ const data = [
 
   Adım 3: Fonksiyonunuzdan bir öğe döndürmeyi unutmayın.
 
-  Adım 4: Fonksiyonunuzun dışında, tüm datayı döngüye sokun(loop). Bir div.article öğesi oluşturmak ve bunu div.articles içindeki DOM'a eklemek için
+  Adım 4: Fonksiyonunuzun dışında, tüm datayı döngüye sokun(loop). Bir div.article öğesi oluşturmak ve 
+  bunu div.articles içindeki DOM'a eklemek için
   her yinelemede oluşturduğunuz bileşeninizi kullanacaksınız(bknz. index.html).
 
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+const haberYapici = function (dataBase) {
+  const container = document.createElement("div");
+  container.className = "article" ;
+  
+  const h2Div = document.createElement("h2");
+  h2Div.textContent = dataBase.baslik ;
+  container.appendChild (h2Div) ;
+
+  const pDiv = document.createElement("p");
+  pDiv.className = "tarih" ;
+  pDiv.textContent = dataBase.tarih ;
+  container.appendChild (pDiv) ;
+
+  const pDiv1 = document.createElement("p");
+  pDiv1.textContent = dataBase.ilkParagraf ;
+  container.appendChild (pDiv1) ;
+
+  const pDiv2 = document.createElement("p");
+  pDiv2.textContent = dataBase.ikinciParagraf ;
+  container.appendChild (pDiv2) ;
+
+  const pDiv3 = document.createElement("p");
+  pDiv3.textContent = dataBase.ucuncuParagraf ;
+  container.appendChild (pDiv3) ;
+
+  const spanDiv= document.createElement("span") ;
+  spanDiv.style.fontSize = "30px" ;
+  spanDiv.className = "expandButton" ;
+  spanDiv.textContent = "+" ;
+
+  spanDiv.addEventListener ("click",  () => {
+    container.classList.toggle("article-open");  
+  })
+  container.appendChild(spanDiv);
+  return container ;
+
+}; 
+
+const article= document.querySelector(".articles");
+
+data.map(item => article.appendChild(haberYapici(item)));
